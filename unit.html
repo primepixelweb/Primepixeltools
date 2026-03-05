@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unit Converter – PrimePixel Tools</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--blue:#3bc1ff;
+--card:#111827;
+--text:#e5e7eb;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#000;
+font-family:'Inter',sans-serif;
+color:var(--text);
+}
+
+/* PRELOADER */
+
+#preloader{
+position:fixed;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9999;
+transition:opacity .6s, visibility .6s;
+}
+
+#preloader.fade{
+opacity:0;
+visibility:hidden;
+}
+
+#preloader img{
+width:170px;
+margin-bottom:25px;
+}
+
+.loader{
+width:150px;
+height:2px;
+background:#222;
+overflow:hidden;
+}
+
+.loader::after{
+content:'';
+display:block;
+height:100%;
+width:50%;
+background:var(--blue);
+animation:load 1.2s infinite;
+}
+
+@keyframes load{
+0%{transform:translateX(-100%)}
+100%{transform:translateX(200%)}
+}
+
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 8%;
+border-bottom:1px solid rgba(59,193,255,.3);
+position:sticky;
+top:0;
+background:#000;
+z-index:1000;
+}
+
+.logo{
+display:flex;
+align-items:center;
+font-family:'Montserrat';
+font-weight:800;
+font-size:22px;
+}
+
+.logo img{
+height:36px;
+margin-right:10px;
+}
+
+.logo span{
+color:var(--blue);
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:white;
+font-size:14px;
+}
+
+/* MOBILE MENU */
+
+.menu-btn{
+display:none;
+font-size:26px;
+cursor:pointer;
+}
+
+.mobile-menu{
+display:none;
+position:absolute;
+top:70px;
+right:20px;
+background:#111;
+border:1px solid rgba(59,193,255,.4);
+border-radius:8px;
+padding:20px;
+flex-direction:column;
+gap:15px;
+}
+
+.mobile-menu a{
+text-decoration:none;
+color:white;
+}
+
+/* PAGE */
+
+.container{
+max-width:700px;
+margin:auto;
+padding:80px 20px;
+text-align:center;
+}
+
+.container h1{
+font-family:'Montserrat';
+font-size:40px;
+margin-bottom:10px;
+}
+
+.container span{
+color:var(--blue);
+}
+
+.container p{
+color:#9ca3af;
+margin-bottom:40px;
+}
+
+/* TOOL */
+
+.converter{
+background:var(--card);
+padding:40px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,.05);
+}
+
+input, select{
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:20px;
+background:#000;
+border:1px solid #333;
+color:white;
+border-radius:6px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:var(--blue);
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+}
+
+.result{
+margin-top:30px;
+font-size:24px;
+font-weight:700;
+color:var(--blue);
+}
+
+/* FOOTER */
+
+footer{
+background:#0a0a0a;
+text-align:center;
+padding:40px;
+margin-top:80px;
+}
+
+footer p{
+color:#9ca3af;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.nav-links{
+display:none;
+}
+
+.menu-btn{
+display:block;
+}
+
+.mobile-menu.active{
+display:flex;
+}
+
+.container h1{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- PRELOADER -->
+
+<div id="preloader">
+
+<img src="preloader-logo.png">
+
+<div class="loader"></div>
+
+</div>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+
+<img src="logo.png">
+
+PrimePixel <span>Tools</span>
+
+</div>
+
+<div class="nav-links">
+
+<a href="index.html">Home</a>
+<a href="index.html#tools">Tools</a>
+
+</div>
+
+<div class="menu-btn" onclick="toggleMenu()">⋮</div>
+
+<div class="mobile-menu" id="mobileMenu">
+
+<a href="index.html" onclick="closeMenu()">Home</a>
+<a href="index.html#tools" onclick="closeMenu()">Tools</a>
+
+</div>
+
+</nav>
+
+<!-- CONTENT -->
+
+<section class="container">
+
+<h1>Unit <span>Converter</span></h1>
+
+<p>Convert different units instantly</p>
+
+<div class="converter">
+
+<input type="number" id="value" placeholder="Enter value">
+
+<select id="conversion">
+
+<option value="km-miles">Kilometers → Miles</option>
+<option value="miles-km">Miles → Kilometers</option>
+<option value="kg-lb">Kilograms → Pounds</option>
+<option value="lb-kg">Pounds → Kilograms</option>
+<option value="c-f">Celsius → Fahrenheit</option>
+<option value="f-c">Fahrenheit → Celsius</option>
+<option value="m-ft">Meters → Feet</option>
+<option value="ft-m">Feet → Meters</option>
+
+</select>
+
+<button onclick="convertUnit()">Convert</button>
+
+<div class="result" id="result">-</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>© 2026 PrimePixel</p>
+
+</footer>
+
+<script>
+
+/* PRELOADER */
+
+window.onload=function(){
+
+setTimeout(function(){
+
+document.getElementById("preloader").classList.add("fade");
+
+},1000);
+
+};
+
+/* MOBILE MENU */
+
+function toggleMenu(){
+
+document.getElementById("mobileMenu").classList.toggle("active");
+
+}
+
+function closeMenu(){
+
+document.getElementById("mobileMenu").classList.remove("active");
+
+}
+
+/* UNIT CONVERTER */
+
+function convertUnit(){
+
+let value=parseFloat(document.getElementById("value").value);
+let type=document.getElementById("conversion").value;
+let result;
+
+if(isNaN(value)){
+alert("Enter a value");
+return;
+}
+
+switch(type){
+
+case "km-miles":
+result=value*0.621371;
+break;
+
+case "miles-km":
+result=value*1.60934;
+break;
+
+case "kg-lb":
+result=value*2.20462;
+break;
+
+case "lb-kg":
+result=value*0.453592;
+break;
+
+case "c-f":
+result=(value*9/5)+32;
+break;
+
+case "f-c":
+result=(value-32)*5/9;
+break;
+
+case "m-ft":
+result=value*3.28084;
+break;
+
+case "ft-m":
+result=value*0.3048;
+break;
+
+}
+
+document.getElementById("result").innerText=result.toFixed(4);
+
+}
+
+</script>
+
+</body>
+
+</html>
