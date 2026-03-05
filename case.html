@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Case Converter – Convert Text Case Online | PrimePixel Tools</title>
+
+<meta name="description" content="Free online case converter tool to convert text to uppercase, lowercase, title case and sentence case instantly.">
+
+<meta name="keywords" content="case converter, uppercase converter, lowercase converter, sentence case converter, title case converter, text case converter, convert text case online">
+
+<link rel="icon" href="favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--blue:#3bc1ff;
+--card:#111827;
+--text:#e5e7eb;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#000;
+font-family:'Inter',sans-serif;
+color:var(--text);
+line-height:1.7;
+}
+
+/* PRELOADER */
+
+#preloader{
+position:fixed;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9999;
+transition:opacity .6s, visibility .6s;
+}
+
+#preloader.fade{
+opacity:0;
+visibility:hidden;
+}
+
+#preloader img{
+width:170px;
+margin-bottom:25px;
+}
+
+.loader{
+width:150px;
+height:2px;
+background:#222;
+overflow:hidden;
+}
+
+.loader::after{
+content:'';
+display:block;
+height:100%;
+width:50%;
+background:var(--blue);
+animation:load 1.2s infinite;
+}
+
+@keyframes load{
+0%{transform:translateX(-100%)}
+100%{transform:translateX(200%)}
+}
+
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 8%;
+border-bottom:1px solid rgba(59,193,255,.3);
+position:sticky;
+top:0;
+background:#000;
+z-index:1000;
+}
+
+.logo{
+display:flex;
+align-items:center;
+font-family:'Montserrat';
+font-weight:800;
+font-size:22px;
+}
+
+.logo img{
+height:36px;
+margin-right:10px;
+}
+
+.logo span{
+color:var(--blue);
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:white;
+font-size:14px;
+}
+
+/* MOBILE MENU */
+
+.menu-btn{
+display:none;
+font-size:26px;
+cursor:pointer;
+}
+
+.mobile-menu{
+display:none;
+position:absolute;
+top:70px;
+right:20px;
+background:#111;
+border:1px solid rgba(59,193,255,.4);
+border-radius:8px;
+padding:20px;
+flex-direction:column;
+gap:15px;
+}
+
+.mobile-menu a{
+text-decoration:none;
+color:white;
+}
+
+/* TITLE */
+
+.title{
+text-align:center;
+padding:70px 20px 20px;
+}
+
+.title h1{
+font-family:'Montserrat';
+font-size:42px;
+}
+
+.title span{
+color:var(--blue);
+}
+
+/* TOOL */
+
+.tool{
+max-width:700px;
+margin:40px auto;
+background:var(--card);
+padding:40px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,.05);
+text-align:center;
+}
+
+textarea{
+width:100%;
+height:150px;
+padding:12px;
+background:#000;
+border:1px solid #333;
+color:white;
+border-radius:6px;
+resize:none;
+}
+
+.buttons{
+margin-top:20px;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+justify-content:center;
+}
+
+button{
+padding:10px 20px;
+background:var(--blue);
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+}
+
+/* CONTENT */
+
+.content{
+max-width:900px;
+margin:auto;
+padding:60px 20px;
+}
+
+.content h2{
+font-family:'Montserrat';
+margin-bottom:10px;
+margin-top:40px;
+}
+
+.content p{
+color:#9ca3af;
+margin-bottom:20px;
+}
+
+.faq h3{
+color:var(--blue);
+margin-top:20px;
+}
+
+/* FOOTER */
+
+footer{
+background:#0a0a0a;
+text-align:center;
+padding:40px;
+margin-top:60px;
+}
+
+footer p{
+color:#9ca3af;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.nav-links{
+display:none;
+}
+
+.menu-btn{
+display:block;
+}
+
+.mobile-menu.active{
+display:flex;
+}
+
+.title h1{
+font-size:30px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="preloader">
+<img src="preloader-logo.png">
+<div class="loader"></div>
+</div>
+
+<nav>
+
+<div class="logo">
+<img src="logo.png">
+PrimePixel <span>Tools</span>
+</div>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="index.html#tools">All Tools</a>
+</div>
+
+<div class="menu-btn" onclick="toggleMenu()">⋮</div>
+
+<div class="mobile-menu" id="mobileMenu">
+<a href="index.html">Home</a>
+<a href="index.html#tools">All Tools</a>
+</div>
+
+</nav>
+
+<section class="title">
+
+<h1>Case <span>Converter</span></h1>
+
+<p>Convert text to uppercase, lowercase, title case or sentence case.</p>
+
+</section>
+
+<div class="tool">
+
+<textarea id="text" placeholder="Enter your text here..."></textarea>
+
+<div class="buttons">
+
+<button onclick="upperCase()">UPPERCASE</button>
+<button onclick="lowerCase()">lowercase</button>
+<button onclick="titleCase()">Title Case</button>
+<button onclick="sentenceCase()">Sentence Case</button>
+<button onclick="copyText()">Copy</button>
+<button onclick="clearText()">Clear</button>
+
+</div>
+
+</div>
+
+<section class="content">
+
+<h2>What is a Case Converter?</h2>
+
+<p>
+A case converter is a tool that converts text into different letter formats such as uppercase, lowercase, title case, and sentence case. It helps writers, students, and developers quickly format text.
+</p>
+
+<h2>How to Use the Case Converter</h2>
+
+<p>
+1. Enter or paste your text in the box.<br>
+2. Select the case format you want.<br>
+3. The tool instantly converts your text.<br>
+4. Copy the converted text.
+</p>
+
+<h2>Example</h2>
+
+<p>
+Input: hello world<br>
+Uppercase: HELLO WORLD<br>
+Title Case: Hello World
+</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq">
+
+<h3>What is uppercase?</h3>
+<p>Uppercase converts all letters to capital letters.</p>
+
+<h3>What is lowercase?</h3>
+<p>Lowercase converts all letters to small letters.</p>
+
+<h3>What is title case?</h3>
+<p>Title case capitalizes the first letter of each word.</p>
+
+<h3>Is this case converter free?</h3>
+<p>Yes, all tools on PrimePixel Tools are completely free.</p>
+
+</div>
+
+<h2>Related Tools</h2>
+
+<p>
+
+<a href="word-counter.html">Word Counter</a><br>
+<a href="password.html">Password Generator</a><br>
+<a href="percentage.html">Percentage Calculator</a>
+
+</p>
+
+<h2>About PrimePixel</h2>
+
+<p>
+PrimePixel Tools provides free online utilities for calculations, conversions, and productivity tools. If you need a professional website for your business, visit PrimePixel Web.
+</p>
+
+</section>
+
+<footer>
+<p>© 2026 PrimePixel</p>
+</footer>
+
+<script>
+
+window.onload=function(){
+setTimeout(function(){
+document.getElementById("preloader").classList.add("fade");
+},1000);
+};
+
+function toggleMenu(){
+document.getElementById("mobileMenu").classList.toggle("active");
+}
+
+function upperCase(){
+let text=document.getElementById("text");
+text.value=text.value.toUpperCase();
+}
+
+function lowerCase(){
+let text=document.getElementById("text");
+text.value=text.value.toLowerCase();
+}
+
+function titleCase(){
+let text=document.getElementById("text");
+text.value=text.value.replace(/\w\S*/g,function(txt){
+return txt.charAt(0).toUpperCase()+txt.substr(1).toLowerCase();
+});
+}
+
+function sentenceCase(){
+let text=document.getElementById("text");
+let str=text.value.toLowerCase();
+text.value=str.charAt(0).toUpperCase()+str.slice(1);
+}
+
+function copyText(){
+let text=document.getElementById("text");
+text.select();
+document.execCommand("copy");
+}
+
+function clearText(){
+document.getElementById("text").value="";
+}
+
+</script>
+
+</body>
+</html>

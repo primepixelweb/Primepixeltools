@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Word Counter – Count Words, Characters and Sentences | PrimePixel Tools</title>
+
+<meta name="description" content="Free online word counter tool. Count words, characters, sentences and paragraphs instantly. Perfect for writers, students and bloggers.">
+
+<meta name="keywords" content="
+word counter, character counter, sentence counter, paragraph counter,
+online word counter, word count tool, text counter, word calculator,
+essay word counter, blog word counter, writing tool, character count tool
+">
+
+<link rel="icon" href="favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--blue:#3bc1ff;
+--card:#111827;
+--text:#e5e7eb;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#000;
+color:white;
+font-family:'Inter',sans-serif;
+}
+
+/* PRELOADER */
+
+#preloader{
+position:fixed;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+#preloader img{
+width:150px;
+}
+
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+border-bottom:1px solid rgba(59,193,255,.3);
+}
+
+.logo{
+display:flex;
+align-items:center;
+font-family:'Montserrat';
+font-weight:800;
+font-size:22px;
+}
+
+.logo img{
+height:36px;
+margin-right:10px;
+}
+
+.logo span{
+color:var(--blue);
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+}
+
+.menu-btn{
+display:none;
+font-size:28px;
+cursor:pointer;
+}
+
+.mobile-menu{
+display:none;
+position:absolute;
+top:70px;
+right:20px;
+background:#111;
+border:1px solid rgba(59,193,255,.3);
+padding:20px;
+border-radius:8px;
+}
+
+.mobile-menu a{
+display:block;
+margin:10px 0;
+color:white;
+text-decoration:none;
+}
+
+.mobile-menu.active{
+display:block;
+}
+
+/* TITLE */
+
+.title{
+text-align:center;
+padding:70px 20px 20px;
+}
+
+.title h1{
+font-family:'Montserrat';
+font-size:40px;
+}
+
+.title span{
+color:var(--blue);
+}
+
+/* TOOL */
+
+.tool{
+max-width:800px;
+margin:40px auto;
+background:var(--card);
+padding:40px;
+border-radius:12px;
+text-align:center;
+}
+
+textarea{
+width:100%;
+height:200px;
+padding:15px;
+background:#000;
+border:1px solid #333;
+color:white;
+border-radius:8px;
+resize:none;
+font-size:15px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-top:20px;
+}
+
+.stat{
+background:#000;
+padding:15px;
+border-radius:8px;
+border:1px solid #222;
+}
+
+.stat h3{
+color:var(--blue);
+margin-bottom:5px;
+}
+
+/* CONTENT */
+
+.content{
+max-width:900px;
+margin:auto;
+padding:60px 20px;
+line-height:1.8;
+}
+
+.content h2{
+font-family:'Montserrat';
+font-size:28px;
+margin-top:40px;
+margin-bottom:10px;
+}
+
+.content p{
+color:#9ca3af;
+}
+
+.content a{
+color:var(--blue);
+text-decoration:none;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.nav-links{
+display:none;
+}
+
+.menu-btn{
+display:block;
+}
+
+.stats{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="preloader">
+<img src="preloader-logo.png">
+</div>
+
+<nav>
+
+<div class="logo">
+<img src="logo.png">
+PrimePixel <span>Tools</span>
+</div>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="index.html#tools">All Tools</a>
+</div>
+
+<div class="menu-btn" onclick="toggleMenu()">⋮</div>
+
+<div class="mobile-menu" id="mobileMenu">
+<a href="index.html">Home</a>
+<a href="index.html#tools">All Tools</a>
+</div>
+
+</nav>
+
+<section class="title">
+
+<h1>Word <span>Counter</span></h1>
+<p>Count words, characters and sentences instantly.</p>
+
+</section>
+
+<div class="tool">
+
+<textarea id="textInput" placeholder="Type or paste your text here..."></textarea>
+
+<div class="stats">
+
+<div class="stat">
+<h3>Words</h3>
+<p id="wordCount">0</p>
+</div>
+
+<div class="stat">
+<h3>Characters</h3>
+<p id="charCount">0</p>
+</div>
+
+<div class="stat">
+<h3>Sentences</h3>
+<p id="sentenceCount">0</p>
+</div>
+
+<div class="stat">
+<h3>Paragraphs</h3>
+<p id="paragraphCount">0</p>
+</div>
+
+</div>
+
+</div>
+
+<section class="content">
+
+<h2>What is a Word Counter?</h2>
+
+<p>
+A word counter is a tool that counts the number of words, characters, sentences and paragraphs in a piece of text. It is commonly used by writers, bloggers, students and editors to track writing length.
+</p>
+
+<h2>How to Use the Word Counter</h2>
+
+<p>
+1. Paste or type your text into the text box.<br>
+2. The tool automatically counts words and characters.<br>
+3. You can instantly see statistics like sentences and paragraphs.
+</p>
+
+<h2>Example</h2>
+
+<p>
+Text: "This is a simple example."<br>
+Word count: 5
+</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<p>
+
+<strong>Is this word counter free?</strong><br>
+Yes, PrimePixel Tools are completely free.
+
+<br><br>
+
+<strong>Who uses word counters?</strong><br>
+Students, writers, bloggers, journalists and content creators commonly use word counters.
+
+</p>
+
+<h2>Related Tools</h2>
+
+<p>
+<a href="percentage.html">Percentage Calculator</a><br>
+<a href="random.html">Random Number Generator</a><br>
+<a href="bmi.html">BMI Calculator</a>
+</p>
+
+<h2>About PrimePixel</h2>
+
+<p>
+PrimePixel Tools provides free online utilities including calculators, generators and productivity tools designed to make everyday tasks easier.
+</p>
+
+</section>
+
+<script>
+
+window.onload=function(){
+document.getElementById("preloader").style.display="none";
+}
+
+function toggleMenu(){
+document.getElementById("mobileMenu").classList.toggle("active");
+}
+
+const textInput=document.getElementById("textInput");
+
+textInput.addEventListener("input",function(){
+
+let text=textInput.value;
+
+let words=text.trim().split(/\s+/).filter(word=>word.length>0);
+let sentences=text.split(/[.!?]+/).filter(s=>s.trim().length>0);
+let paragraphs=text.split(/\n+/).filter(p=>p.trim().length>0);
+
+document.getElementById("wordCount").innerText=words.length;
+document.getElementById("charCount").innerText=text.length;
+document.getElementById("sentenceCount").innerText=sentences.length;
+document.getElementById("paragraphCount").innerText=paragraphs.length;
+
+});
+
+</script>
+
+</body>
+</html>

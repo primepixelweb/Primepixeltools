@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Image Compressor – Reduce Image Size Online | PrimePixel Tools</title>
+
+<meta name="description" content="Compress images online for free. Reduce image size without losing quality using the PrimePixel Image Compressor tool.">
+
+<meta name="keywords" content="
+image compressor, compress image online, reduce image size,
+photo compressor, jpeg compressor, png compressor,
+online image optimizer, free image compressor,
+image compression tool, photo size reducer
+">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--blue:#3bc1ff;
+--card:#111827;
+--text:#e5e7eb;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#000;
+font-family:'Inter',sans-serif;
+color:var(--text);
+}
+
+/* PRELOADER */
+
+#preloader{
+position:fixed;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+#preloader.fade{
+opacity:0;
+visibility:hidden;
+transition:.6s;
+}
+
+#preloader img{
+width:170px;
+margin-bottom:25px;
+}
+
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 8%;
+border-bottom:1px solid rgba(59,193,255,.3);
+background:#000;
+}
+
+.logo{
+display:flex;
+align-items:center;
+font-family:'Montserrat';
+font-weight:800;
+font-size:22px;
+}
+
+.logo img{
+height:36px;
+margin-right:10px;
+}
+
+.logo span{
+color:var(--blue);
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:white;
+font-size:14px;
+}
+
+/* MOBILE MENU */
+
+.menu-btn{
+display:none;
+font-size:26px;
+cursor:pointer;
+}
+
+.mobile-menu{
+display:none;
+position:absolute;
+top:70px;
+right:20px;
+background:#111;
+border:1px solid rgba(59,193,255,.4);
+border-radius:8px;
+padding:20px;
+flex-direction:column;
+gap:15px;
+}
+
+.mobile-menu a{
+text-decoration:none;
+color:white;
+}
+
+.mobile-menu.active{
+display:flex;
+}
+
+/* PAGE */
+
+.container{
+max-width:700px;
+margin:auto;
+padding:80px 20px;
+text-align:center;
+}
+
+.container h1{
+font-family:'Montserrat';
+font-size:40px;
+margin-bottom:10px;
+}
+
+.container span{
+color:var(--blue);
+}
+
+.container p{
+color:#9ca3af;
+margin-bottom:40px;
+}
+
+/* TOOL */
+
+.compressor{
+background:var(--card);
+padding:40px;
+border-radius:10px;
+}
+
+input{
+margin-top:20px;
+margin-bottom:20px;
+}
+
+.preview img{
+max-width:100%;
+border-radius:8px;
+margin-top:20px;
+}
+
+button{
+margin-top:20px;
+padding:12px 20px;
+background:var(--blue);
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+}
+
+/* SEO CONTENT */
+
+.content{
+max-width:900px;
+margin:auto;
+padding:60px 20px;
+line-height:1.8;
+}
+
+.content h2{
+font-family:'Montserrat';
+margin-top:40px;
+font-size:28px;
+}
+
+.content p{
+color:#9ca3af;
+}
+
+.content a{
+color:var(--blue);
+text-decoration:none;
+}
+
+/* FOOTER */
+
+footer{
+background:#0a0a0a;
+text-align:center;
+padding:40px;
+margin-top:80px;
+}
+
+footer p{
+color:#9ca3af;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.nav-links{
+display:none;
+}
+
+.menu-btn{
+display:block;
+}
+
+.container h1{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="preloader">
+
+<img src="preloader-logo.png">
+
+</div>
+
+<nav>
+
+<div class="logo">
+
+<img src="logo.png">
+
+PrimePixel <span>Tools</span>
+
+</div>
+
+<div class="nav-links">
+
+<a href="index.html">Home</a>
+<a href="index.html#tools">Tools</a>
+
+</div>
+
+<div class="menu-btn" onclick="toggleMenu()">⋮</div>
+
+<div class="mobile-menu" id="mobileMenu">
+
+<a href="index.html">Home</a>
+<a href="index.html#tools">Tools</a>
+
+</div>
+
+</nav>
+
+<section class="container">
+
+<h1>Image <span>Compressor</span></h1>
+
+<p>Reduce image file size quickly without losing quality</p>
+
+<div class="compressor">
+
+<input type="file" id="upload" accept="image/*">
+
+<label>Compression Quality</label>
+
+<input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.7">
+
+<div class="preview" id="preview"></div>
+
+<button onclick="compressImage()">Compress Image</button>
+
+<a id="downloadLink" style="display:none" download="compressed.jpg">
+<button>Download Image</button>
+</a>
+
+</div>
+
+</section>
+
+<section class="content">
+
+<h2>What is an Image Compressor?</h2>
+
+<p>
+An image compressor reduces the size of an image file while maintaining acceptable quality. This helps improve website speed and reduce storage space.
+</p>
+
+<h2>How to Use the Image Compressor</h2>
+
+<p>
+1. Upload an image from your device.<br>
+2. Adjust the compression quality slider.<br>
+3. Click compress image.<br>
+4. Download the compressed image.
+</p>
+
+<h2>Example</h2>
+
+<p>
+A 3MB image can be compressed to around 800KB depending on the compression level.
+</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<p>
+
+<strong>Does compression reduce image quality?</strong><br>
+Slightly, but the tool tries to keep quality high while reducing file size.
+
+<br><br>
+
+<strong>Is this image compressor free?</strong><br>
+Yes, all PrimePixel tools are free to use.
+
+</p>
+
+<h2>Related Tools</h2>
+
+<p>
+
+<a href="qr.html">QR Code Generator</a><br>
+<a href="random.html">Random Number Generator</a><br>
+<a href="percentage.html">Percentage Calculator</a>
+
+</p>
+
+<h2>About PrimePixel</h2>
+
+<p>
+PrimePixel Tools provides free online utilities including calculators, converters, and generators to make digital tasks faster and easier.
+</p>
+
+</section>
+
+<footer>
+
+<p>© 2026 PrimePixel</p>
+
+</footer>
+
+<script>
+
+window.onload=function(){
+setTimeout(function(){
+document.getElementById("preloader").classList.add("fade");
+},1000);
+};
+
+function toggleMenu(){
+document.getElementById("mobileMenu").classList.toggle("active");
+}
+
+function compressImage(){
+
+let file=document.getElementById("upload").files[0];
+let quality=document.getElementById("quality").value;
+
+if(!file){
+alert("Please upload an image");
+return;
+}
+
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+let img=new Image();
+
+img.src=e.target.result;
+
+img.onload=function(){
+
+let canvas=document.createElement("canvas");
+let ctx=canvas.getContext("2d");
+
+canvas.width=img.width;
+canvas.height=img.height;
+
+ctx.drawImage(img,0,0);
+
+let compressed=canvas.toDataURL("image/jpeg",quality);
+
+let preview=document.getElementById("preview");
+
+preview.innerHTML="<img src='"+compressed+"'>";
+
+let download=document.getElementById("downloadLink");
+
+download.href=compressed;
+download.style.display="inline-block";
+
+};
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+</script>
+
+</body>
+</html>

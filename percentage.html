@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Percentage Calculator – Calculate Percentages Online | PrimePixel Tools</title>
+
+<meta name="description" content="Free online percentage calculator to calculate percentages instantly. Find percentage of numbers, percentage increase, percentage decrease and more.">
+
+<meta name="keywords" content="
+percentage calculator, percent calculator, calculate percentage, percentage of number,
+percentage increase calculator, percentage decrease calculator, percent formula,
+math percentage calculator, student percentage calculator, calculate percent online,
+discount percentage calculator, exam percentage calculator, percentage formula tool,
+percentage math tool, percent finder, percent equation calculator, percent change calculator
+">
+
+<link rel="icon" href="favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--blue:#3bc1ff;
+--card:#111827;
+--text:#e5e7eb;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+background:#000;
+font-family:'Inter',sans-serif;
+color:white;
+}
+
+/* PRELOADER */
+
+#preloader{
+position:fixed;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+#preloader img{
+width:160px;
+margin-bottom:20px;
+}
+
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+border-bottom:1px solid rgba(59,193,255,.3);
+}
+
+.logo{
+display:flex;
+align-items:center;
+font-family:'Montserrat';
+font-weight:800;
+font-size:22px;
+}
+
+.logo img{
+height:36px;
+margin-right:10px;
+}
+
+.logo span{
+color:var(--blue);
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+}
+
+.menu-btn{
+display:none;
+font-size:28px;
+cursor:pointer;
+}
+
+.mobile-menu{
+display:none;
+position:absolute;
+top:70px;
+right:20px;
+background:#111;
+border:1px solid rgba(59,193,255,.3);
+padding:20px;
+border-radius:8px;
+}
+
+.mobile-menu a{
+display:block;
+margin:10px 0;
+color:white;
+text-decoration:none;
+}
+
+.mobile-menu.active{
+display:block;
+}
+
+/* TITLE */
+
+.title{
+text-align:center;
+padding:70px 20px 20px;
+}
+
+.title h1{
+font-family:'Montserrat';
+font-size:42px;
+}
+
+.title span{color:var(--blue);}
+
+/* TOOL */
+
+.tool{
+max-width:600px;
+margin:40px auto;
+background:var(--card);
+padding:40px;
+border-radius:10px;
+text-align:center;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:#000;
+border:1px solid #333;
+color:white;
+border-radius:6px;
+}
+
+button{
+margin-top:15px;
+padding:10px 20px;
+background:var(--blue);
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.result{
+margin-top:20px;
+font-size:22px;
+color:var(--blue);
+}
+
+/* CONTENT */
+
+.content{
+max-width:900px;
+margin:auto;
+padding:60px 20px;
+}
+
+.content h2{
+font-family:'Montserrat';
+margin-top:40px;
+}
+
+.content p{
+color:#9ca3af;
+margin-top:10px;
+}
+
+.faq h3{
+color:var(--blue);
+margin-top:20px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.nav-links{display:none;}
+
+.menu-btn{display:block;}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="preloader">
+<img src="preloader-logo.png">
+</div>
+
+<nav>
+
+<div class="logo">
+<img src="logo.png">
+PrimePixel <span>Tools</span>
+</div>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="index.html#tools">All Tools</a>
+</div>
+
+<div class="menu-btn" onclick="toggleMenu()">⋮</div>
+
+<div class="mobile-menu" id="mobileMenu">
+<a href="index.html">Home</a>
+<a href="index.html#tools">All Tools</a>
+</div>
+
+</nav>
+
+<section class="title">
+<h1>Percentage <span>Calculator</span></h1>
+<p>Calculate percentages instantly.</p>
+</section>
+
+<div class="tool">
+
+<input type="number" id="percent" placeholder="Enter percentage">
+
+<input type="number" id="number" placeholder="Enter number">
+
+<button onclick="calculatePercent()">Calculate</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<section class="content">
+
+<h2>What is a Percentage Calculator?</h2>
+
+<p>
+A percentage calculator helps calculate percentages quickly and accurately. Percentages are used in education, finance, statistics, business calculations, and daily mathematics.
+</p>
+
+<h2>How to Use the Percentage Calculator</h2>
+
+<p>
+1. Enter the percentage value.<br>
+2. Enter the number.<br>
+3. Click calculate.<br>
+4. The result appears instantly.
+</p>
+
+<h2>Example</h2>
+
+<p>
+25% of 200 = 50
+</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq">
+
+<h3>What is percentage?</h3>
+<p>Percentage means a value out of 100.</p>
+
+<h3>Where are percentages used?</h3>
+<p>Percentages are used in finance, education, statistics, and business calculations.</p>
+
+<h3>Is this tool free?</h3>
+<p>Yes, PrimePixel Tools are completely free.</p>
+
+</div>
+
+<h2>Related Tools</h2>
+
+<p>
+
+<a href="age.html">Age Calculator</a><br>
+<a href="bmi.html">BMI Calculator</a><br>
+<a href="random.html">Random Number Generator</a>
+
+</p>
+
+<h2>About PrimePixel</h2>
+
+<p>
+PrimePixel Tools offers free online calculators, generators and productivity tools.
+</p>
+
+</section>
+
+<script>
+
+window.onload=function(){
+document.getElementById("preloader").style.display="none";
+}
+
+function toggleMenu(){
+document.getElementById("mobileMenu").classList.toggle("active");
+}
+
+function calculatePercent(){
+
+let percent=document.getElementById("percent").value;
+let number=document.getElementById("number").value;
+
+if(percent==""||number==""){
+document.getElementById("result").innerHTML="Enter both values";
+return;
+}
+
+let result=(percent/100)*number;
+
+document.getElementById("result").innerHTML=percent+"% of "+number+" = "+result;
+
+}
+
+</script>
+
+</body>
+</html>

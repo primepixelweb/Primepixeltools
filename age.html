@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Age Calculator – Calculate Exact Age Online | PrimePixel Tools</title>
+
+<meta name="description" content="Free online age calculator to calculate your exact age from date of birth in years, months, days, hours, minutes and seconds.">
+
+<meta name="keywords" content="age calculator, online age calculator, calculate age, age from date of birth, exact age calculator, dob age calculator, calculate age in years months days, free age calculator tool, birthday age calculator, date of birth calculator, age difference calculator, calculate my age, online dob calculator, accurate age calculator, primepixel tools age calculator">
+
+<link rel="icon" href="favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--blue:#3bc1ff;
+--card:#111827;
+--text:#e5e7eb;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#000;
+font-family:'Inter',sans-serif;
+color:var(--text);
+line-height:1.7;
+}
+
+/* PRELOADER */
+
+#preloader{
+position:fixed;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9999;
+transition:opacity .6s, visibility .6s;
+}
+
+#preloader.fade{
+opacity:0;
+visibility:hidden;
+}
+
+#preloader img{
+width:170px;
+margin-bottom:25px;
+}
+
+.loader{
+width:150px;
+height:2px;
+background:#222;
+overflow:hidden;
+}
+
+.loader::after{
+content:'';
+display:block;
+height:100%;
+width:50%;
+background:var(--blue);
+animation:load 1.2s infinite;
+}
+
+@keyframes load{
+0%{transform:translateX(-100%)}
+100%{transform:translateX(200%)}
+}
+
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 8%;
+border-bottom:1px solid rgba(59,193,255,.3);
+position:sticky;
+top:0;
+background:#000;
+z-index:1000;
+}
+
+.logo{
+display:flex;
+align-items:center;
+font-family:'Montserrat';
+font-weight:800;
+font-size:22px;
+}
+
+.logo img{
+height:36px;
+margin-right:10px;
+}
+
+.logo span{
+color:var(--blue);
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:white;
+font-size:14px;
+}
+
+/* MOBILE MENU */
+
+.menu-btn{
+display:none;
+font-size:26px;
+cursor:pointer;
+}
+
+.mobile-menu{
+display:none;
+position:absolute;
+top:70px;
+right:20px;
+background:#111;
+border:1px solid rgba(59,193,255,.4);
+border-radius:8px;
+padding:20px;
+flex-direction:column;
+gap:15px;
+}
+
+.mobile-menu a{
+text-decoration:none;
+color:white;
+}
+
+/* TITLE */
+
+.title{
+text-align:center;
+padding:70px 20px 20px;
+}
+
+.title h1{
+font-family:'Montserrat';
+font-size:42px;
+}
+
+.title span{
+color:var(--blue);
+}
+
+/* CALCULATOR */
+
+.calculator{
+max-width:500px;
+margin:40px auto;
+background:var(--card);
+padding:40px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,.05);
+text-align:center;
+}
+
+.calculator input{
+width:100%;
+padding:12px;
+margin-top:15px;
+background:#000;
+border:1px solid #333;
+color:white;
+border-radius:6px;
+}
+
+.calculator button{
+margin-top:20px;
+padding:12px 25px;
+background:var(--blue);
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+}
+
+.result{
+margin-top:25px;
+font-size:20px;
+color:var(--blue);
+line-height:1.8;
+}
+
+/* CONTENT */
+
+.content{
+max-width:900px;
+margin:auto;
+padding:60px 20px;
+}
+
+.content h2{
+font-family:'Montserrat';
+margin-bottom:10px;
+margin-top:40px;
+}
+
+.content p{
+color:#9ca3af;
+margin-bottom:20px;
+}
+
+.faq h3{
+color:var(--blue);
+margin-top:20px;
+}
+
+/* FOOTER */
+
+footer{
+background:#0a0a0a;
+text-align:center;
+padding:40px;
+margin-top:60px;
+}
+
+footer p{
+color:#9ca3af;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.nav-links{
+display:none;
+}
+
+.menu-btn{
+display:block;
+}
+
+.mobile-menu.active{
+display:flex;
+}
+
+.title h1{
+font-size:30px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="preloader">
+<img src="preloader-logo.png">
+<div class="loader"></div>
+</div>
+
+<nav>
+
+<div class="logo">
+<img src="logo.png">
+PrimePixel <span>Tools</span>
+</div>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="index.html#tools">All Tools</a>
+</div>
+
+<div class="menu-btn" onclick="toggleMenu()">⋮</div>
+
+<div class="mobile-menu" id="mobileMenu">
+<a href="index.html">Home</a>
+<a href="index.html#tools">All Tools</a>
+</div>
+
+</nav>
+
+<section class="title">
+
+<h1>Age <span>Calculator</span></h1>
+
+<p>Calculate your exact age from your date of birth instantly.</p>
+
+</section>
+
+<div class="calculator">
+
+<label>Select Your Birth Date</label>
+
+<input type="date" id="dob">
+
+<button onclick="startAgeCalculation()">Calculate Age</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<section class="content">
+
+<h2>What is an Age Calculator?</h2>
+
+<p>
+An age calculator is an online tool that calculates your exact age from your date of birth including years, months, days, hours, minutes and seconds.
+</p>
+
+<h2>How to Use the Age Calculator</h2>
+
+<p>
+1. Select your birth date.<br>
+2. Click calculate age.<br>
+3. The tool instantly shows your exact age.<br>
+4. Seconds update automatically every second.
+</p>
+
+<h2>Example</h2>
+
+<p>
+If your birth date is 1 January 2000 and today is 1 January 2026, your age will be 26 years.
+</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq">
+
+<h3>Is this age calculator accurate?</h3>
+<p>Yes. This calculator uses real time date and time to calculate your exact age.</p>
+
+<h3>Can I calculate age in months and days?</h3>
+<p>Yes. This calculator shows age in years, months, days, hours, minutes and seconds.</p>
+
+<h3>Is this tool free?</h3>
+<p>Yes. All tools on PrimePixel Tools are completely free.</p>
+
+<h3>Do I need to create an account?</h3>
+<p>No. You can use the tool instantly without registration.</p>
+
+</div>
+
+<h2>Related Tools</h2>
+
+<p>
+
+<a href="percentage.html">Percentage Calculator</a><br>
+<a href="bmi.html">BMI Calculator</a><br>
+<a href="random.html">Random Number Generator</a>
+
+</p>
+
+<h2>About PrimePixel</h2>
+
+<p>
+PrimePixel Tools provides free online utilities for calculations and conversions. If you need a professional website for your business, visit PrimePixel Web.
+</p>
+
+</section>
+
+<footer>
+<p>© 2026 PrimePixel</p>
+</footer>
+
+<script>
+
+window.onload=function(){
+setTimeout(function(){
+document.getElementById("preloader").classList.add("fade");
+},1000);
+};
+
+function toggleMenu(){
+document.getElementById("mobileMenu").classList.toggle("active");
+}
+
+let interval;
+
+function startAgeCalculation(){
+
+let dob=document.getElementById("dob").value;
+
+if(!dob){
+document.getElementById("result").innerHTML="Please select birth date";
+return;
+}
+
+let birthDate=new Date(dob);
+
+clearInterval(interval);
+
+interval=setInterval(function(){
+
+let now=new Date();
+
+let diff=now-birthDate;
+
+let seconds=Math.floor(diff/1000);
+let minutes=Math.floor(seconds/60);
+let hours=Math.floor(minutes/60);
+let days=Math.floor(hours/24);
+
+let years=Math.floor(days/365);
+let months=Math.floor((days%365)/30);
+let remainingDays=(days%365)%30;
+
+let remainingHours=hours%24;
+let remainingMinutes=minutes%60;
+let remainingSeconds=seconds%60;
+
+document.getElementById("result").innerHTML=
+
+years+" Years<br>"+
+months+" Months<br>"+
+remainingDays+" Days<br>"+
+remainingHours+" Hours<br>"+
+remainingMinutes+" Minutes<br>"+
+remainingSeconds+" Seconds";
+
+},1000);
+
+}
+
+</script>
+
+</body>
+</html>
